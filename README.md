@@ -22,6 +22,9 @@ The dependency of cactusapi is kept at a bare minimum:
 [curl](https://cran.r-project.org/web/packages/curl/index.html) for
 handling the API requests.
 
+cactusapi takes a single input and resolves it to either `StdInChi`,
+`InChI`, `StdInChIKey`, `InChIKey`, `SMILES`, `Names`, or `IUPAC_Name`.
+
 ## Installation
 
 You can install the development version of cccapi from
@@ -34,7 +37,7 @@ remotes::install_github("RaoulWolf/cactusapi")
 
 ## Example
 
-This is a basic example which shows you how to get the InChI
+This is a basic example which shows you how to get the (standard) InChI
 representation of caffeine:
 
 ``` r
