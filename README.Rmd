@@ -51,7 +51,10 @@ caffeine:
 ```{r example}
 library(cactusapi)
 
-get_representation("caffeine", "StdInChI")
+get_representation(
+  structure_identifier = "caffeine", 
+  representation = "StdInChI"
+)
 ```
 
 ## Acknowledgement
