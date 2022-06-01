@@ -8,8 +8,8 @@ Authors@R:
              role = c("aut", "cre"),
              email = "raoul.wolf@ngi.no",
              comment = c(ORCID = "0000-0001-5971-8525")))
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Description: The cactusapi package provides lightweight access to the CACTUS 
+    Chemical Identifier Resolver API services.
 License: MIT + file LICENSE
 Depends: R (>= 3.0.0)
 Imports: 
