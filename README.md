@@ -31,8 +31,8 @@ You can install the development version of cccapi from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages(devtools)
-remotes::install_github("RaoulWolf/cactusapi")
+# install.packages("devtools")
+remotes::install_github("ZeroPM-H2020/cactusapi")
 ```
 
 ## Example
