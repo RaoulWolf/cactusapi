@@ -7,7 +7,7 @@
 #'
 #'   Allowed entries for \code{representation} are: \code{"StdInChI"},
 #'   \code{"InChI"}, \code{"StdInChIKey"}, \code{"InChIKey"}, \code{"SMILES"},
-#'   and \code{"Names"}.
+#'   \code{"Names"} or \code{"IUPAC_Name"}.
 #' @param structure_identifier (Character.) The input; see Details.
 #' @param representation (Character.) A character string indicating the desired
 #'   output format (NOT case sensitive); see Details.
@@ -65,8 +65,7 @@ get_representation <- function(structure_identifier, representation) {
   # check status
   if (result$status_code != 200L) {
     warning(
-      "Sorry, your structure identifier could not be resolved.",
-      call. = FALSE
+      "Sorry, your structure identifier could not be resolved.", call. = FALSE
     )
     return(NA_character_)
   }

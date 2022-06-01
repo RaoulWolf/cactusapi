@@ -7,7 +7,8 @@
   ) {
     if (
       representation %in% c(
-        "stdinchi", "inchi", "stdinchikey", "inchikey", "smiles", "names"
+        "stdinchi", "inchi", "stdinchikey", "inchikey", "smiles", "names",
+        "iupac_name"
       )
     ) {
       return(TRUE)

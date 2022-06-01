@@ -16,39 +16,54 @@ knitr::opts_chunk$set(
 # cactusapi
 
 <!-- badges: start -->
+[![R-CMD-check](https://github.com/RaoulWolf/cactusapi/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/RaoulWolf/cactusapi/actions/workflows/R-CMD-check.yaml)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
-The goal of cactusapi is to ...
+> A [ZeroPM](https://zeropm.eu/) R package
+
+The goal of the cactusapi package is to provide a minimal and lightweight 
+interface to the 
+[CACTUS Chemical Identifier Resolver](https://cactus.nci.nih.gov/chemical/structure) 
+API services. 
+
+The dependency of cactusapi is kept at a bare minimum: 
+[curl](https://cran.r-project.org/web/packages/curl/index.html) for handling 
+the API requests.
 
 ## Installation
 
-You can install the development version of cactusapi like so:
+You can install the development version of cccapi from 
+[GitHub](https://github.com/) with:
 
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+``` {r install}
+#| eval = FALSE
+# install.packages(devtools)
+remotes::install_github("RaoulWolf/cactusapi")
 ```
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+This is a basic example which shows you how to get the InChI representation of 
+caffeine:
 
 ```{r example}
 library(cactusapi)
-## basic example code
+
+get_representation("caffeine", "StdInChI")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+## Acknowledgement
 
-```{r cars}
-summary(cars)
-```
+This R package was developed by the EnviData initiative at the 
+[Norwegian Geotechnical Institute (NGI)](https://www.ngi.no/eng) as part of the 
+project 
+[ZeroPM: Zero pollution of Persistent, Mobile substances](https://zeropm.eu/). 
+This project has received funding from the European Union's Horizon 2020 
+research and innovation programme under grant agreement No 101036756.
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this. You could also use GitHub Actions to re-render `README.Rmd` every time you push. An example workflow can be found here: <https://github.com/r-lib/actions/tree/v1/examples>.
+---
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+If you find this package useful and can afford it, please consider making a 
+donation to a humanitarian non-profit organization, such as 
+[Sea-Watch](https://sea-watch.org/en/). Thank you. 

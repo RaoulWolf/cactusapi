@@ -26,7 +26,7 @@ If the input (\code{structure_identifier}) is an InChIKey, it needs
 
   Allowed entries for \code{representation} are: \code{"StdInChI"},
   \code{"InChI"}, \code{"StdInChIKey"}, \code{"InChIKey"}, \code{"SMILES"},
-  and \code{"Names"}.
+  \code{"Names"} or \code{"IUPAC_Name"}.
 }
 \examples{
 \dontrun{
