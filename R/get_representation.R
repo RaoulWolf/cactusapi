@@ -11,6 +11,8 @@
 #' @param structure_identifier (Character.) The input; see Details.
 #' @param representation (Character.) A character string indicating the desired
 #'   output format (NOT case sensitive); see Details.
+#' @param xml (Logical.) Should the result be returned as XML string? Defaults
+#'   to \code{FALSE}.
 #' @return Returns the representation as (character) \code{vector}.
 #' @seealso \url{https://cactus.nci.nih.gov/chemical/structure}
 #' @examples \dontrun{
@@ -24,17 +26,20 @@
 #' }
 #' @importFrom curl curl_fetch_memory handle_setopt new_handle
 #' @importFrom utils URLencode
+#' @importFrom XML xmlParse xmlToList
 #' @export
-get_representation <- function(structure_identifier, representation) {
+get_representation <- function(
+    structure_identifier, representation, xml = FALSE
+  ) {
 
-  if (!.check_structure_identifier(structure_identifier)) {
+  if(!.check_structure_identifier(structure_identifier)) {
     return(NA_character_)
   }
 
   # ensure representation
   representation <- tolower(representation)
 
-  if (!.check_representation(representation)) {
+  if(!.check_representation(representation)) {
     return(NA_character_)
   }
 
@@ -50,8 +55,14 @@ get_representation <- function(structure_identifier, representation) {
   # define url base
   base_url <- "https://cactus.nci.nih.gov/chemical/structure"
 
+  # define format
+  format <- "xml"
+
   # compose url
-  url <- paste(base_url, structure_identifier, representation, sep = "/")
+  url <- paste(
+    base_url, structure_identifier, representation, format,
+    sep = "/"
+  )
 
   # create new cURL handle
   handle <- curl::new_handle()
@@ -62,19 +73,39 @@ get_representation <- function(structure_identifier, representation) {
   # retrieve results
   result <- curl::curl_fetch_memory(url, handle)
 
-  # check status
-  if (result$status_code != 200L) {
-    warning(
-      "Sorry, your structure identifier could not be resolved.", call. = FALSE
-    )
-    return(NA_character_)
-  }
-
   # transform content
   content <- rawToChar(result$content)
 
-  if (representation == "names" && grepl(pattern = "\n", content)) {
-    content <- unlist(strsplit(content, split = "\n"), use.names = FALSE)
+  # check status
+  if(result$status_code != 200L) {
+    if(xml) {
+      return(content)
+    } else {
+      content <- XML::xmlParse(content)
+      content <- XML::xmlToList(content)
+      warning(content, call. = FALSE)
+      return(NA_character_)
+    }
+  }
+
+  if(!xml) {
+    # transform content
+    content <- XML::xmlParse(content)
+    content <- XML::xmlToList(content, addAttributes = FALSE, simplify = TRUE)
+    content <- unique(as.vector(content, mode = "character"))
+
+    # account for missing values
+    content <- sapply(
+      content,
+      FUN = function(x) {
+        if(x == "\n\n") {
+          NA_character_
+        } else {
+          x
+        }
+      },
+      USE.NAMES = FALSE
+    )
   }
 
   # return content

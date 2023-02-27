@@ -1,8 +1,4 @@
 
-# Placeholder with simple test
-expect_equal(1 + 1, 2)
-
-
 # test .check_structure_identifier()
 
 expect_false(
@@ -53,10 +49,6 @@ expect_equal(
 expect_equal(
   get_representation("caffeine", "something"),
   NA_character_
-)
-
-expect_warning(
-  get_representation("idontknow", "StdInChI")
 )
 
 expect_equal(

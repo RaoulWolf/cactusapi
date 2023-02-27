@@ -4,13 +4,16 @@
 \alias{get_representation}
 \title{GET the Representation of a Structure Identifier from CACTUS}
 \usage{
-get_representation(structure_identifier, representation)
+get_representation(structure_identifier, representation, xml = FALSE)
 }
 \arguments{
 \item{structure_identifier}{(Character.) The input; see Details.}
 
 \item{representation}{(Character.) A character string indicating the desired
 output format (NOT case sensitive); see Details.}
+
+\item{xml}{(Logical.) Should the result be returned as XML string? Defaults
+to \code{FALSE}.}
 }
 \value{
 Returns the representation as (character) \code{vector}.
